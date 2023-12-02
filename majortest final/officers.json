@@ -1,0 +1,73 @@
+[{
+  "_id": {
+    "$oid": "6449609c59ceecc80ed6a324"
+  },
+  "name_officer": "Tara Jacobs",
+  "office": "DGP Chhattisgath",
+  "id": "Tara",
+  "pass": "Tara",
+  "code": "99",
+  "rateval": 36,
+  "ratecount": 18,
+  "rating": 2
+},{
+  "_id": {
+    "$oid": "6449634059ceecc80ed6a329"
+  },
+  "name_officer": "Pamela Stone",
+  "office": "IG Bilaspur Chhattisgath",
+  "id": "pamela",
+  "pass": "pamela",
+  "code": "88:99",
+  "rateval": 5,
+  "ratecount": 1,
+  "rating": 5
+},{
+  "_id": {
+    "$oid": "644963c359ceecc80ed6a32b"
+  },
+  "name_officer": "Dale Hubbard",
+  "office": "DIG Bilaspur zone Chhattisgath",
+  "id": "dale",
+  "pass": "dale",
+  "code": "66:88:99",
+  "rateval": 0,
+  "ratecount": 0,
+  "rating": 0
+},{
+  "_id": {
+    "$oid": "6449643259ceecc80ed6a32c"
+  },
+  "name_officer": "Gerry Baldwin",
+  "office": "SSP Bilaspur dist. Chhattisgath",
+  "id": "gerry",
+  "pass": "gerry",
+  "code": "44:66:88:99",
+  "rateval": 5,
+  "ratecount": 1,
+  "rating": 5
+},{
+  "_id": {
+    "$oid": "644964f359ceecc80ed6a32d"
+  },
+  "name_officer": "Miriam Hunter",
+  "office": "SHO police station koni, Bilaspur dist. Chhattisgath",
+  "id": "Hunter",
+  "pass": "Hunter",
+  "code": "33:44:66:88:99",
+  "rateval": 13,
+  "ratecount": 3,
+  "rating": 4.333333333333333
+},{
+  "_id": {
+    "$oid": "6449655c59ceecc80ed6a32e"
+  },
+  "name_officer": "Verda Morton",
+  "office": "SHO police station Masturi, Bilaspur dist. Chhattisgath",
+  "id": "verda",
+  "pass": "verda",
+  "code": "11:44:66:88:99",
+  "rateval": 19,
+  "ratecount": 5,
+  "rating": 3.8
+}]

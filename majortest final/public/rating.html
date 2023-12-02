@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AARC</title>
+    <style>
+         body
+          {     background-image: url(images/back.png);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size:100% 100%;
+          }
+          .title
+          {
+            text-align:center;
+            font-size: large;
+            /*font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";*/
+          }
+          .office_list
+          {
+            text-align: center;
+          }
+          .office_list table
+          {
+            display:inline-block;
+            margin-top: 20px;
+            border-collapse: collapse;
+           /* background-color: rgb(254,254,254);*/
+            height:450px;
+            overflow-y: scroll;
+          }
+          tr{border-bottom: 1px solid rgb(240,240,240);}  th, td{text-align: left; padding-left:10px;  color:rgb(26, 25, 25);}
+          .name{width:400px;} .post{ width:200px;} .sn{width:200px;}
+          .head{background-color:rgb(240,240,240); height:30px; position:sticky ;top:0;}
+
+    </style>
+</head>
+<body>
+        <!--Title of WEbsite-->
+        <div class="title">
+            <h1>AARC</h1>
+            <h3>Administrative Authority and Responsibility to the Citizen</h3>
+        </div>
+
+         <!--List of officers --> 
+    <div class="office_list"> 
+        <table id="office">
+          <tr class="head" ><th class="sn">Officer name</th> <th class="name">Post</th> <th class="post">Rating</th></tr>
+          
+          
+    
+        </table>
+       </div>
+    
+</body>
+<script>
+    fetch(
+        "http://127.0.0.1:3100/ranking",
+        {
+            method:"GET",
+            headers:{"Content-Type":"application/json", Accept:"application/json",},
+        }
+    ).then(res=>res.json()).then((data)=>
+    {
+        let office_list= document.getElementById("office");
+                  
+                     data.forEach((element) => {
+                     let tr=document.createElement("tr");
+                     let td=document.createElement("td");
+                     td.innerHTML=(element.name);
+                     tr.appendChild(td);
+                    
+                    
+                     let td1=document.createElement("td");
+                     td1.innerHTML=(element.post);
+                     tr.appendChild(td1);
+                     
+                     let td2=document.createElement("td");
+                     td2.innerHTML=("⭐"+element.rating+" ("+element.count+")");
+                     tr.appendChild(td2);
+                     
+
+
+                     office_list.appendChild(tr);
+
+                   });
+              
+    })
+</script>
+</html>

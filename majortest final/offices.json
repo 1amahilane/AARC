@@ -1,0 +1,49 @@
+[{
+  "_id": {
+    "$oid": "6419f93606e6f3e7adf5b20b"
+  },
+  "name_officer": "Tara Jacobs",
+  "office": "DGP Chhattisgath",
+  "code": "99",
+  "rank": 1
+},{
+  "_id": {
+    "$oid": "6419fd6006e6f3e7adf5b20e"
+  },
+  "name_officer": "Pamela Stone",
+  "office": "IG Bilaspur Chhattisgath",
+  "code": "88:99",
+  "rank": 2
+},{
+  "_id": {
+    "$oid": "6419fe0d06e6f3e7adf5b20f"
+  },
+  "name_officer": "Dale Hubbard",
+  "office": "DIG Bilaspur zone Chhattisgath",
+  "code": "66:88:99",
+  "rank": 3
+},{
+  "_id": {
+    "$oid": "641a011906e6f3e7adf5b210"
+  },
+  "name_officer": "Gerry Baldwin",
+  "office": "SSP Bilaspur dist. Chhattisgath",
+  "code": "44:66:88:99",
+  "rank": 4
+},{
+  "_id": {
+    "$oid": "641a017b06e6f3e7adf5b211"
+  },
+  "name_officer": "Miriam Hunter",
+  "office": "SHO police station koni, Bilaspur dist. Chhattisgath",
+  "code": "33:44:66:88:99",
+  "rank": 5
+},{
+  "_id": {
+    "$oid": "641a022606e6f3e7adf5b212"
+  },
+  "name_officer": "Verda Morton",
+  "office": "SHO police station Masturi, Bilaspur dist. Chhattisgath",
+  "code": "11:44:66:88:99",
+  "rank": 5
+}]

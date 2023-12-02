@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listing Practice</title>
+</head>
+<body>
+    <center> <input type="text" id="search" onkeyup="search_office()" name="searchBar"> </center>
+    <center><ol id="office"></ol> </center>
+    
+</body>
+<script>
+   let office_list= document.getElementById("office");
+ fetch("http://localhost:3100/offices",
+    {
+        method:"GET",
+        headers:{"Content-Type":"application/json", Accept:"application/json",},
+
+
+    }
+    ).then(
+        (resp)=>resp.json()
+    ).then(
+        (data)=>
+               {  console.log(data);
+                   data.forEach((element) => {
+                      let a=document.createElement("a");
+                      let title= document.createTextNode(element.name_officer +" / "+element.office);
+                      let link="writecoml.html"+"?code="+element.code+"&name="+element.name_officer+","+element.office;
+                      a.setAttribute("href",link);
+                      a.setAttribute("class","offices");
+                      a.appendChild(title);
+
+                      let li=document.createElement("li");
+                      li.appendChild(a);
+                      office_list.appendChild(li);
+
+                   });
+               }
+    )
+
+    function search_office()
+    {
+         let input=document.getElementById("search").value;
+          input=input.toLowerCase();
+         let offices_list  = document.getElementsByTagName("li");
+         for(i=0;i<offices_list.length;i++)
+         {
+            if(!offices_list[i].innerHTML.toLowerCase().includes(input))
+              { 
+                offices_list[i].style.display="none";
+              }
+            else 
+            {
+              offices_list[i].style.display=""; 
+            }  
+         }
+    }
+
+</script>
+</html>

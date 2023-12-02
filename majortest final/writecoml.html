@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://kit.fontawesome.com/195e9e5dd2.js" crossorigin="anonymous"></script>
+    
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <title>AARC</title>
+        <style type="text/css">
+           *{ margin:0;  padding:0;  }  
+
+
+        .main
+           {
+            background-image: url("https://images.citizenmatters.in/wp-content/uploads/sites/2/2019/04/29115431/loksabha.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain ;    /*cover*/  /*1200px,700px;*/
+            height:700px;
+            background-color:rgb(254, 254, 254);
+           }
+           .titl
+           {
+               text-align: center;
+               padding-top: 80px;
+           }
+
+          /* table for departments */
+          .tabl{
+                  
+                  
+                
+                 margin:auto;
+                 
+          } 
+          /* icons for departments */
+         .depart_icon{
+          font-weight: bold;
+          font-size: 150px;
+          color: rgb(254,254,254);
+         }  
+
+          /* Name of departments */
+        .depart_name
+        {text-align: center;
+        font-weight: bold;
+        color: rgb(254,254,254);
+        }
+
+        .depart{text-align: center;}
+        
+          
+
+
+    /*  For search bar box*/       
+    .input-icons  i{
+			position: absolute;
+           border: 4px solid black;
+		}
+
+    .button{
+        position: absolute;
+           border:2px solid black;
+         }
+		
+		.input-icons {
+			width: 100%;
+			margin-bottom: 10px;
+      margin-top: 10px;
+		}
+      
+		
+		.icon {
+			padding: 10px;
+			min-width: 40px;
+      font-weight: bold;
+      font-size:large;
+		}
+		
+		.input-field {
+			width: 93%;
+			padding: 10px;
+            padding-left:60px;
+      
+			text-align: center;
+		} 
+     
+
+        
+        </style>
+      </head>
+<body>
+    <div class="container-fluid">
+        <div class="row main" >
+          
+          <div class="col-md-3"> </div>
+
+          <div class="col-md-6">
+            <div class="row" style="height:30%;" >
+              
+              <!--Title of AARC-->
+              <div class="titl">
+                <h1 style="color: rgb(254,254,254); font-weight: bold;">AARC</h1>
+                <h3 style="color: rgb(254,254,254);">Administrative Authority and Responsibility to the Citizen</h3>
+ 
+              </div>
+              </div>
+
+              <div>
+                <div><input type="email" name="email" id="email" placeholder="Email:example@gmail.com" ></div>
+                <center> <textarea name="complain" id="complain" cols="90" rows="10" ></textarea></center>
+                 <center><button type="button" onclick="send()" name="submit" >SUBMIT</button></center>
+                <div style="text-align: center;">
+                 <form>
+                  <input type="file" name="file" id="files" multiple>
+                  <button type="submit">Add images</button>
+                  </form>
+                 </div>  
+                  
+                  <div style="text-align: center;">
+                  <a href="#" id="0" onmouseover="ratEffectOver(this)" onmouseout="ratEffectOut()" onclick="rating(this.id)" style="color:rgb(216, 216, 189); font-size:70px; font-weight:bold;"> &#x2605;</a>
+                  <a href="#" id="1" onmouseover="ratEffectOver(this)" onmouseout="ratEffectOut()" onclick="rating(this.id)" style="color:rgb(216, 216, 189); font-size:70px; font-weight:bold;"> &#x2605;</a>
+                  <a href="#" id="2" onmouseover="ratEffectOver(this)" onmouseout="ratEffectOut()" onclick="rating(this.id)" style="color:rgb(216, 216, 189); font-size:70px; font-weight:bold;"> &#x2605;</a>
+                  <a href="#" id="3" onmouseover="ratEffectOver(this)" onmouseout="ratEffectOut()" onclick="rating(this.id)" style="color:rgb(216, 216, 189); font-size:70px; font-weight:bold;"> &#x2605;</a>
+                  <a href="#" id="4" onmouseover="ratEffectOver(this)" onmouseout="ratEffectOut()" onclick="rating(this.id)" style="color:rgb(216, 216, 189); font-size:70px; font-weight:bold;"> &#x2605;</a>
+                  <a href="#" id="5" onmouseover="ratEffectOver(this)" onmouseout="ratEffectOut()" onclick="rating(this.id)" style="color:rgb(216, 216, 189); font-size:70px; font-weight:bold;"> &#x2605;</a>
+                  </div>
+
+        
+              </div>
+             
+
+               
+          </div>
+
+          <div class="col-md-3"></div>
+          
+        
+        
+        </div>
+       </div>
+</body>
+<script>
+ async function otp(mail)
+  {  let otp_res;
+     let data= {mail:mail,check:"sendOtp",};
+   await fetch(
+      "http://localhost:3100/otp",
+      {
+        method:"POST",
+        headers: {"Content-Type":"application/json", Accept:"application/json",},
+        body:JSON.stringify(data)
+      }
+    ).then((res)=>res.json()).then(async (next)=>{ 
+      if(next=="proceed")
+     { 
+      let recOtp= await prompt("PLS Enter the OTP ,which has been sent to Your mail")
+       let Data={pass:recOtp,check:"verify"};
+       await fetch(
+        "http://localhost:3100/otp",
+         {
+           method:"POST",
+           headers:{"Content-Type":"application/json",Accept:"application/json",},
+           body:JSON.stringify(Data) 
+         }
+            ).then((res)=>res.json()).then((confermation)=>{ 
+              if(confermation=="true")
+              { 
+                  otp_res= true;
+              } 
+              else{ otp_res= false; alert("Wrong OTP Submitted");}
+            })
+     }
+     else console.log("Something Error in OTP verification");
+
+    })
+  return otp_res;}
+</script>
+
+<script>
+  let formData=new FormData();
+  let isRate=true;
+const form = document.querySelector('form');
+form.addEventListener('submit', (e) => {
+    
+    e.preventDefault();
+    // Prevents HTML handling submission
+    const mail = document.getElementById("name");
+    const files = document.getElementById("files").files;
+    
+    // Appends value of text input
+    for(let i =0; i < files.length; i++) {
+        formData.append("files", files[i]);
+    }
+    })                          
+                                                   
+
+  async  function  send()
+  {
+    mail=document.getElementById("email").value;
+    if(!(mail=="" || mail==null)){
+      let atpos=mail.indexOf("@");
+      let dotpos=mail.lastIndexOf(".");
+      if(!(atpos<1 || dotpos<atpos+2 || dotpos+2>mail.length))
+    {  
+      
+   if(await otp(mail))  
+    {console.log("done")
+    let x=document.getElementById("complain").value;
+    let post = ["", "", "","",];
+    let param=window.location.search.split("&");
+    let para0=param[0]; let para1=param[1];
+    let para=para0.split("?")[1]
+    para=para.split("=")[1];
+    para=para.split(":");
+    post[0]=para[para.length-1];
+    for(let i=para.length-2,j=1;i>0;i--,j++)
+       post[j]=para[i]+":"+post[j-1];
+    let ofcr ="";
+    para1= para1.split("=")[1] ;
+    para1=para1.split("%20");
+    for(let i of para1){ ofcr+=i+" ";}
+    let data={Authority:ofcr,complain:x,DGP:post[0],IG:post[1],DIG:post[2],SP:post[3]};
+    let DATA=JSON.stringify(data);
+    formData.append("main",DATA);
+    formData.append("mail",mail);
+    confirm("read again and submit");
+    /*for (let obj of formData) {
+      console.log(obj);
+    }*/
+    fetch(
+      "http://localhost:3100/complain",
+      {
+        method: "POST",
+      
+        body: formData
+      }
+      
+    ).then((res)=>res.json()).then(data=>console.log(data))
+    formData.delete("main"); formData.delete("mail"); formData.delete("files");
+    }
+    } else alert("Your id is incoreect!\npls enter Correct Enter your email id");}
+    else alert("Enter your email id!");
+   
+  }
+  
+  function ratEffectOver(star)
+  {
+    if(isRate)
+    {
+     let id= parseInt(star.id);
+     for(let i=0;i<=id;i++)
+     {
+         star_ele=document.getElementById(JSON.stringify(i));
+         star_ele.style.color="rgb(254, 254, 25)";
+     }
+    }
+  }
+  function ratEffectOut()
+  {
+     if(isRate)
+     {
+     for(let i=0;i<6;i++)
+     {
+         star_ele=document.getElementById(JSON.stringify(i));
+         star_ele.style.color="rgb(216, 216, 189)";
+     }
+    }
+        
+
+  }
+
+  async function rating(rate)
+  {  
+    mail=document.getElementById("email").value;
+    if(!(mail=="" || mail==null))
+    {
+      let atpos=mail.indexOf("@");
+      let dotpos=mail.lastIndexOf(".");
+      if(!(atpos<1 || dotpos<atpos+2 || dotpos+2>mail.length))
+      {
+      if(await otp(mail))  
+      {   
+     let para=window.location.search.split("?")[1];
+     para=para.split("&")[0];
+     para=para.split("=")[1];
+     let point=parseInt(rate);
+     let data={val:point,mail:mail};
+     fetch(
+      "http://localhost:3100/rating/"+para,
+      {
+        method:"PUT",
+        headers: {"Content-Type":"application/json", Accept:"application/json",},
+        body: JSON.stringify(data)
+      }
+     ).then((res)=>res.json()).then((data)=>{console.log(data) ; isRate=false;});
+    }
+      } else alert("Your id is incoreect!\npls enter Correct Enter your email id");
+    } else alert("Pls enetr your emaill id!");
+
+  }
+</script>
+</html>

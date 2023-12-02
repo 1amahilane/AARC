@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome directed page</h1>
+    <h1 id="para"></h1>
+</body>
+<script>
+   let para=window.location.search.split("?");
+    para=para[1]; //  para[0] is previos part before ?
+    para=para.split("=");
+
+   document.getElementById("para").innerText=para[0]+"="+para[1];
+   
+/*let paramString = urlString.split('?')[1];
+let params_arr = paramString.split('&');
+
+for (let i = 0; i < params_arr.length; i++) {
+   let pair = params_arr[i].split('=');
+   console.log("Key is:", pair[0]);
+   console.log("Value is:", pair[1]);
+}*/
+</script>
+</html>

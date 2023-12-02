@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>AARC</title>
+    <style>
+         body
+          {     background-image: url(images/back.png);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size:100% 100%;
+          }
+          .title
+          {
+            text-align:center;
+            font-size: large;
+            /*font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";*/
+          }
+          .office_list
+          {
+            text-align: center;
+          }
+          .office_list table
+          {
+            display:inline-block;
+            margin-top: 20px;
+            border-collapse: collapse;
+           /* background-color: rgb(254,254,254);*/
+            height:450px;
+            overflow-y: scroll;
+          }
+          tr{border-bottom: 1px solid rgb(240,240,240);}  th, td{text-align: left; padding-left:10px;  color:rgb(27, 26, 26);}
+         .sn{width:500px;}
+          .head{background-color:rgb(240,240,240); height:30px; position:sticky ;top:0;}
+          
+          /*login popup*/
+          .login{text-align: right; padding-right: 25px; margin-top:20px;}
+          .loginbtn{background-color:rgb(3, 3, 192) ; font-size: 14px; border:0px; border-radius: 2px; padding-left:11px; padding-right:11px; padding-top:3px; padding-bottom:3px;}
+          
+
+    </style>
+</head>
+<body>
+
+  <!--Check login credential-->
+<div class="login"><button type="button" onclick="clearFun()"  class="btn loginbtn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Login/LogOut
+</button></div>
+
+        <!--Title of WEbsite-->
+        <div class="title">
+            <h1>AARC</h1>
+            <h3>Administrative Authority and Responsibility to the Citizen</h3>
+        </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Officer Authontication</h5>
+        <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        &nbsp &nbsp &nbsp Id &nbsp  &nbsp  &nbsp   <input type="text" id="idname"> <br>
+       Password <input type="password" id="password">
+      </div>
+      <div class="modal-footer" style="text-align: center;">
+        <button type="button" onclick="auth()"  class="btn btn-primary" data-bs-dismiss="modal">Login</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+         <!--List of officers --> 
+    <div class="office_list"> 
+        <table id="office">
+          <tr class="head" ><th class="sn">S.N.</th></tr>
+
+          
+          
+    
+        </table>
+       </div>
+  
+</body>
+<script>
+
+    function clearFun(){
+      const list =  document.getElementById("office");
+     while (list.children.length>1)
+      {
+         list.removeChild(list.lastChild);
+      }
+
+      id=""; pass=""; complains=[];
+    }
+</script>
+
+<script>
+   
+   let complains;
+   let id="";let pass="";
+   async function auth()
+   {  
+    id= await document.getElementById("idname").value;
+    pass= await document.getElementById("password").value;
+    let authdata={id:id,pass:pass};
+   
+    fetch(
+        "http://localhost:3100/complaintable",
+        {
+            method:"POST",
+            headers:{"Content-Type":"application/json", Accept:"application/json",},
+            body:JSON.stringify(authdata)
+        }
+    ).then(res=>res.json()).then((data)=>
+    {   complains=data;
+        console.log(data);
+      
+        let office_list= document.getElementById("office");
+                  
+                     data.forEach((element) => {
+                     let a=document.createElement("a");
+                     let link="table.html?doc="+JSON.stringify(element);
+                     a.setAttribute("href",link)
+                     let title=document.createTextNode(element.gmail_id)
+                     a.appendChild(title);
+                     let tr=document.createElement("tr");
+                     let td=document.createElement("td");
+                     td.appendChild(a);
+                     tr.appendChild(td);
+
+
+                     office_list.appendChild(tr);
+
+                   });
+      document.getElementById("idname").value="";
+      document.getElementById("password").value="";          
+              
+    })
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</html>

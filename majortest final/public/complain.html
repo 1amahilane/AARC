@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AARC</title>
+    <style type="text/css">
+         body
+          {     background-image: url(images/back.png);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size:100% 100%;
+          }
+          .title
+          {
+            text-align:center;
+            font-size: large;
+            /*font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";*/
+          }
+          .conainer{text-align:center;}
+          .conainer_box
+          {
+            display:inline-block;
+          }
+          .flex-container {   display: flex; }
+          .flex-container > div { margin: 10px;}                
+          .mail{ text-align: left; margin-bottom: 10px; position: relative;}
+          .mail_box{width:220px; height: 30px; border-radius: 5px; }
+          .email{font-weight: bold; position:absolute; top:-7px; left:16px; margin:-3px; background-color: rgb(254,254,254); padding-left:7px; padding-right:7px; padding-top: 3px; }
+          .writing_area{padding:20px; border: 0px;}
+           .buttons
+           {
+             text-align: right;
+             margin-top: 8px;
+           }
+           .submit
+           {
+             border-radius:22px;
+             font-size: 20px;
+             padding: 10px;
+             width:120px;
+             border:0px;
+             background-color: rgb(0,0,250);
+             color:rgb(223, 224, 226);
+           }
+           .file
+           {
+            font-weight: bold;
+             font-size: 18px;
+           }
+           .rate{margin-left: 27%;}
+           .rate p
+           { 
+            font-size: 18px;
+            font-weight: bold;
+            padding-left: 14px;
+            color:rgb(58, 58, 58);
+            display: inline-block;
+            margin-right:40px;
+           }
+           .star
+           {
+            color:rgb(77, 77, 77);
+            font-size:30px;
+            font-weight:bold;
+           
+           }
+           
+
+
+    </style>
+</head>
+<body>
+    <!--Title of WEbsite-->
+    <div class="title">
+        <h1>AARC</h1>
+        <h3>Administrative Authority and Responsibility to the Citizen</h3>
+    </div>
+
+    <div class="conainer">
+        <div class="conainer_box">
+        <div class="flex-container">
+        <div class="mail"> <input class="mail_box" type="email" name="email" id="email">
+            <p class="email">Email</p>
+        </div>
+        <div class="mail"> <input class="mail_box" type="text" name="email" id="token">
+          <p class="email">Token</p>
+        </div>
+        </div>
+        
+         <div><textarea class="writing_area" name="complain" id="complain" cols="110" rows="20" placeholder="I would like to request that you take immediate action to resolve this issue(s). I hope that you will take my complaint seriously and take appropriate steps to ensure that this type of problem does not happen in the future.
+
+Thank you for your attention to this matter. I look forward to hearing back from you and receiving a satisfactory resolution.
+            
+Sincerely,
+            
+
+[Your Name]"></textarea>
+        </div>
+   <div class="buttons">
+        <input class="file" type="file" onchange="attachfile()" name="file" id="files" multiple>
+        <button class="submit" type="button" onclick="send()" name="submit">Submit</button>
+   </div>  
+          <div class="rate">
+             <p> Rate the officer </p>
+             <a href="#" id="0" class="star" onmouseover="ratEffectOver(this)" onmouseout="ratEffectOut()" onclick="rating(this.id)" > &#x2605;</a>
+             <a href="#" id="1" class="star" onmouseover="ratEffectOver(this)" onmouseout="ratEffectOut()" onclick="rating(this.id)" > &#x2605;</a>
+             <a href="#" id="2" class="star" onmouseover="ratEffectOver(this)" onmouseout="ratEffectOut()" onclick="rating(this.id)" > &#x2605;</a>
+             <a href="#" id="3" class="star" onmouseover="ratEffectOver(this)" onmouseout="ratEffectOut()" onclick="rating(this.id)" > &#x2605;</a>
+             <a href="#" id="4" class="star" onmouseover="ratEffectOver(this)" onmouseout="ratEffectOut()" onclick="rating(this.id)" > &#x2605;</a>
+             <a href="#" id="5" class="star" onmouseover="ratEffectOver(this)" onmouseout="ratEffectOut()" onclick="rating(this.id)" > &#x2605;</a>
+          </div>
+        </div>
+    </div>
+</body>
+   <script>
+     let formData=new FormData();
+     let isRate=true;
+   const form = document.querySelector('form');
+      function attachfile(){
+       const files = document.getElementById("files").files;
+       
+       // Appends value of text input
+       for(let i =0; i < files.length; i++) {
+           formData.append("files", files[i]);
+       }
+       }                          
+                                                      
+   
+     async  function  send()
+     {
+       let mail=document.getElementById("email").value;
+       let token=document.getElementById("token").value;
+       let x=document.getElementById("complain").value;
+       let post = ["", "", "","",];
+       let param=window.location.search.split("&");
+       let para0=param[0]; let para1=param[1];
+       let para=para0.split("?")[1]
+       para=para.split("=")[1];
+       para=para.split(":");
+       post[0]=para[para.length-1];
+       for(let i=para.length-2,j=1;i>0;i--,j++)
+          post[j]=para[i]+":"+post[j-1];
+       let ofcr ="";
+       para1= para1.split("=")[1] ;
+       para1=para1.split("%20");
+       for(let i of para1){ ofcr+=i+" ";}
+       let data={Authority:ofcr,complain:x,DGP:post[0],IG:post[1],DIG:post[2],SP:post[3]};
+       let DATA=JSON.stringify(data);
+       formData.append("main",DATA);
+       formData.append("mail",mail);
+       formData.append("token",token);
+       confirm("read again and submit");
+       /*for (let obj of formData) {
+         console.log(obj);
+       }*/
+       fetch(
+         "http://localhost:3100/complain",
+         {
+           method: "POST",
+         
+           body: formData
+         }
+         
+       ).then((res)=>res.json()).then(data=>alert(data))
+       formData.delete("main"); formData.delete("mail"); formData.delete("files"); formData.delete("token");
+      }
+     
+     function ratEffectOver(star)
+     {
+       if(isRate)
+       {
+        let id= parseInt(star.id);
+        for(let i=0;i<=id;i++)
+        {
+            star_ele=document.getElementById(JSON.stringify(i));
+            star_ele.style.color="rgb(254, 254, 25)";
+        }
+       }
+     }
+     function ratEffectOut()
+     {
+        if(isRate)
+        {
+        for(let i=0;i<6;i++)
+        {
+            star_ele=document.getElementById(JSON.stringify(i));
+            star_ele.style.color="rgb(77, 77, 77)";
+        }
+       }
+           
+   
+     }
+   
+     async function rating(rate)
+     {  
+       mail=document.getElementById("email").value;
+       if(!(mail=="" || mail==null))
+       {
+         let atpos=mail.indexOf("@");
+         let dotpos=mail.lastIndexOf(".");
+         if(!(atpos<1 || dotpos<atpos+2 || dotpos+2>mail.length))
+         {
+         if(await otp(mail))  
+         {   
+        let para=window.location.search.split("?")[1];
+        para=para.split("&")[0];
+        para=para.split("=")[1];
+        let point=parseInt(rate);
+        let data={val:point,mail:mail};
+        fetch(
+         "http://localhost:3100/rating/"+para,
+         {
+           method:"PUT",
+           headers: {"Content-Type":"application/json", Accept:"application/json",},
+           body: JSON.stringify(data)
+         }
+        ).then((res)=>res.json()).then((data)=>{console.log(data) ; isRate=false;});
+       }
+         } else alert("Your id is incoreect!\npls enter Correct Enter your email id");
+       } else alert("Pls enetr your emaill id!");
+   
+     }
+   </script>
+</html>

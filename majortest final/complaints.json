@@ -1,0 +1,109 @@
+[{
+  "_id": {
+    "$oid": "644baec9cae77dbbd8cb1440"
+  },
+  "type": "count",
+  "count": 8
+},{
+  "_id": {
+    "$oid": "645950d0052a0cb77b68baa6"
+  },
+  "Authority": "novelo ,SHO police station koni, Bilaspur dist. Chhattisgath ",
+  "complain": "",
+  "DGP": "99",
+  "IG": "88:99",
+  "DIG": "66:88:99",
+  "SP": "44:66:88:99",
+  "pic": [
+    "uploads\\09hongkong-top-videoSixteenByNine3000.jpg",
+    "uploads\\14-576-160929160149-thumbnail-4.jpg"
+  ],
+  "index": 1,
+  "gmail_id": "1amahilane@gmail.com"
+},{
+  "_id": {
+    "$oid": "645950ea052a0cb77b68baa7"
+  },
+  "Authority": "hemilton loy,SHO police station koni, Bilaspur dist. Chhattisgath ",
+  "complain": "Software testying",
+  "DGP": "99",
+  "IG": "88:99",
+  "DIG": "66:88:99",
+  "SP": "44:66:88:99",
+  "pic": [],
+  "index": 2,
+  "gmail_id": "1amahilane@gmail.com"
+},{
+  "_id": {
+    "$oid": "64595113052a0cb77b68baa8"
+  },
+  "Authority": "srijiony nivon,SHO police station Masturi, Bilaspur dist. Chhattisgath ",
+  "complain": "testing the software",
+  "DGP": "99",
+  "IG": "88:99",
+  "DIG": "66:88:99",
+  "SP": "44:66:88:99",
+  "pic": [
+    "uploads\\71-78LsD2YL._SL1280_.jpg"
+  ],
+  "index": 3,
+  "gmail_id": "1amahilane@gmail.com"
+},{
+  "_id": {
+    "$oid": "64595140052a0cb77b68baa9"
+  },
+  "Authority": "kawanthika arora,SSP Bilaspur dist. Chhattisgath ",
+  "complain": "To the police ",
+  "DGP": "99",
+  "IG": "88:99",
+  "DIG": "66:88:99",
+  "SP": "",
+  "pic": [],
+  "index": 4,
+  "gmail_id": "1amahilane@gmail.com"
+},{
+  "_id": {
+    "$oid": "6459a14adedb0a3638f1fda0"
+  },
+  "Authority": "kawanthika arora,DIG Bilaspur zone Chhattisgath ",
+  "complain": "software testing",
+  "DGP": "99",
+  "IG": "88:99",
+  "DIG": "",
+  "SP": "",
+  "pic": [
+    "uploads\\71NdzU8+pZL._SX425_.jpg",
+    "uploads\\160w_flexible_solar_panel_1_28eca4e6-7d60-4f1a-bf4a-074dbe6ac8dc_1400x.jpg",
+    "uploads\\390-06_2048x.webp"
+  ],
+  "index": 6,
+  "gmail_id": "1amahilane@gmail.com"
+},{
+  "_id": {
+    "$oid": "6459a700589732ba6109bbf2"
+  },
+  "Authority": "kawanthika arora,DIG Bilaspur zone Chhattisgath ",
+  "complain": "final testing i hope iverything ok",
+  "DGP": "99",
+  "IG": "88:99",
+  "DIG": "",
+  "SP": "",
+  "pic": [
+    "public\\uploads\\big-bouncing-music-speakeranimated-gif.gif"
+  ],
+  "index": 7,
+  "gmail_id": "1amahilane@gmail.com"
+},{
+  "_id": {
+    "$oid": "6459efcb5782c6dd698a9fad"
+  },
+  "Authority": "leo tol,IG Bilaspur Chhattisgath ",
+  "complain": "yyy5yhy5yhyrhwy5nuj5y",
+  "DGP": "99",
+  "IG": "",
+  "DIG": "",
+  "SP": "",
+  "pic": [],
+  "index": 8,
+  "gmail_id": "1amahilane@gmail.com"
+}]

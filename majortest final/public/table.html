@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AARC</title>
+    <style type="text/css">
+         body
+          {     background-image: url(images/back.png);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size:100% 100%;
+          }
+          .title
+          {
+            text-align:center;
+            font-size: large;
+            /*font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";*/
+          }
+          .conainer{text-align:center;}
+          .conainer_box
+          {
+            display:inline-block;
+          }
+          .flex-container {   display: flex; }
+          .flex-container > div { margin: 10px;}  
+          .mail{ text-align: left; margin-bottom: 10px; position: relative;}
+          .mail_box{width:100%; height: 30px; border-radius: 5px; }
+          .email{font-weight: bold; position:absolute; top:-7px; left:16px; margin:-3px; background-color: rgb(254,254,254); padding-left:7px; padding-right:7px; padding-top: 3px; }
+          .writing_area{padding:20px; border: 0px;}
+          .files{display: flex;} 
+          .files > div {
+                          background-color: #f1f1f1;
+                          margin: 10px;
+                          padding: 40px;
+                          font-size: 40px;
+                       }
+
+    </style>
+</head>
+<body>
+    <!--Title of WEbsite-->
+    <div class="title">
+        <h1>AARC</h1>
+        <h3>Administrative Authority and Responsibility to the Citizen</h3>
+    </div>
+
+    <div class="conainer">
+        <div class="conainer_box">
+            <div class="flex-container">
+                <div class="mail"> <input class="mail_box" type="email" name="email" id="email">
+                    <p class="email">Email</p>
+                </div>
+                <div class="mail"> 
+                    <button onclick="responce()">Notify</button>
+                </div>
+            </div>    
+        
+        
+         <div>
+            <textarea class="writing_area" name="complain" id="complain" cols="110" rows="20" readonly></textarea>
+        </div>
+        </div>
+        <div class="files" id="files">
+           
+        </div>
+    </div>
+</body>
+<script>
+        let doc=window.location.search.split("?")[1];
+            doc=doc.split("=")[1];
+            doc=decodeURI(doc); //unescape(doc);
+            doc=JSON.parse(doc); 
+        document.getElementById("email").value=doc.gmail_id;
+        document.getElementById("complain").value=doc.complain;
+        let file=document.getElementById("files");
+        doc.pic.forEach((path)=>
+        {  
+            let div=document.createElement("div");
+            let a=document.createElement("a");
+            a.innerHTML="&#128462;";
+            a.setAttribute("href",path);
+            div.appendChild(a);
+            file.appendChild(div);
+
+        })
+
+       
+   </script>
+   <script>
+    let mail=document.getElementById("email").value;
+    fetch(
+         "http://localhost:3100/notify",
+         {
+           method: "POST",
+           headers: {"Content-Type":"application/json", Accept:"application/json",},
+           body:JSON.stringify({mail:mail, offcr:doc.Authority})
+         }
+       ).then((res)=>res.json()).then(data=>alert(data))
+   </script>
+</html>

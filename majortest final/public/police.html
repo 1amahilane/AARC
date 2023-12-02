@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/195e9e5dd2.js" crossorigin="anonymous"></script>
+    <title>AARC</title>
+
+    <style>
+          body
+          {     background-image: url(images/back.png);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size:100% 100%;
+          }
+
+          .title
+          {
+            text-align:center;
+            font-size: large;
+            /*font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";*/
+          }
+
+          .search
+          {
+            text-align: center;
+          }
+          .search input
+          {
+            width:40%;
+            height:40px;
+            border-radius:20px;
+            font-size:19px ;
+            padding-left:60px;
+          }
+          div.icon
+          {
+            position:absolute;
+            top:14px;
+            margin-left: 29%;
+            
+          }
+          div.search_bar
+          {
+            position:relative;
+            
+          }
+          .i{font-size: 21px; font-weight: bold; color:rgba(0, 0, 0, 0.5);}
+          .office_list
+          {
+            text-align: center;
+          }
+          .office_list table
+          {
+            display:inline-block;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: rgb(254,254,254);
+            height:450px;
+            overflow-y: scroll;
+          }
+          tr{border-bottom: 1px solid rgb(240,240,240);}  th, td{text-align: left; padding-left:10px;}
+          .name{width:400px;} .post{ width:500px;} .sn{width:100px;}
+          .head{background-color:rgb(240,240,240); height:30px; position:sticky ;top:0;}
+          .login{text-align: right; padding-right: 20px; margin-top:20px;}
+          .loginbtn{background-color:rgb(3, 3, 192) ; font-size: 14px; border:0px; border-radius: 2px; padding-left:11px; padding-right:11px; padding-top:3px; padding-bottom:3px;}
+          
+    </style>
+</head>
+<body> 
+     <div class="login">
+      <button onclick="reg()" class="loginbtn"><a style="color:aliceblue"  href="#">Register</a></button>
+      <button class="loginbtn"><a style="color:aliceblue" href="rating.html">Rating</a></button>
+      <button class="loginbtn"><a style="color:aliceblue" href="showcomplain.html">Login</a></button>
+    </div>
+    <!--Title of WEbsite-->
+        <div class="title">
+            <h1>AARC</h1>
+            <h3>Administrative Authority and Responsibility to the Citizen</h3>
+        </div>
+
+    <!--search bar-->
+    <div class="search_bar">
+        <div class="search">
+            <input  type="text" id="search" onkeyup="search_office()" name="searchBar" placeholder="       Officer name/Post/Office/Place/Any keyword">
+         </div>   
+        <div class="icon"> <i class="fas i fa-search"></i></div>
+    </div>
+    <!--List of officers --> 
+    <div class="office_list"> 
+    <table id="office">
+      <tr class="head" ><th class="sn">S.N.</th> <th class="name">Officer name</th> <th class="post">Post</th></tr>
+      
+      
+
+    </table>
+   </div>
+  
+
+</body>
+<script>
+fetch("http://localhost:3100/offices",
+   {
+       method:"GET",
+       headers:{"Content-Type":"application/json", Accept:"application/json",},
+
+
+   }
+   ).then(
+       (resp)=>resp.json()
+   ).then(
+       (data)=>
+              { 
+                let office_list= document.getElementById("office");
+                 
+                let SN=1;
+                  data.forEach((element) => {
+                     let a=document.createElement("a");
+                     let link="complain.html"+"?code="+element.code+"&name="+element.name_officer+","+element.office;
+                     a.setAttribute("href",link);
+                     let tr=document.createElement("tr");
+                     let td=document.createElement("td");
+                     let title= document.createTextNode(SN);
+                     a.appendChild(title);
+                     td.appendChild(a);
+                     tr.appendChild(td);
+                    
+                     let a1=document.createElement("a");
+                     a1.setAttribute("href",link);
+                     let td1=document.createElement("td");
+                     let title1= document.createTextNode(element.name_officer);
+                     a1.appendChild(title1);
+                     td1.appendChild(a1);
+                     tr.appendChild(td1);
+                       
+                     
+                     let a2=document.createElement("a");
+                     a2.setAttribute("href",link);
+                     let td2=document.createElement("td");
+                     let title2= document.createTextNode(element.office);
+                     a2.appendChild(title2);
+                     td2.appendChild(a2);
+                     tr.appendChild(td2);
+                     
+
+
+                     office_list.appendChild(tr);
+
+                  SN=SN+1;});
+              }
+   )
+
+   function search_office()
+   {
+        let input=document.getElementById("search").value;
+         input=input.toLowerCase();
+        let offices_list  = document.getElementsByTagName("td");
+        
+        for(i=0;i<offices_list.length;i++)
+        {
+           if(!offices_list[i].innerHTML.toLowerCase().includes(input))
+             { 
+               offices_list[i].style.display="none";
+             }
+           else 
+           {
+             offices_list[i].style.display=""; 
+           }  
+        }
+   }
+
+</script>
+
+<script>
+  
+ async function reg()
+ {
+  let user= {};
+  let Aadhar= await prompt("pls Enter your aadhar no.:");
+  let reqbody= await {"aadhaarNumber":Aadhar};
+  //request OTP
+  let req= await fetch("https://api.emptra.com/aadhaarVerification/requestOtp",
+   {
+       method:"POST",
+       headers:{"Content-Type":"application/json", Accept:"application/json","clientId":"369bfac34e6997171927d455c267e78d:77a2e9db58dbe89c8d38890ca5f1df4d" ,"secretKey":"UsppVBYTdBLEOKj0JRBZhYfkk0w2RA7Y7UmgWMZZogoA429fZGiWPkP80VwpIocz6"},
+       body:JSON.stringify(reqbody)
+   }
+   )
+   req=await req.json()
+   await (req)
+       {
+              let otp=await prompt("Pls Enter your OTP which has been received in your registered phone no.")
+              reqbody= {"client_id":req.result.data.client_id , "otp":otp};
+       }
+  //Submit OTP  
+   req= await fetch("https://api.emptra.com/aadhaarVerification/submitOtp",
+   {
+       method:"POST",
+       headers:{"Content-Type":"application/json", Accept:"application/json","clientId":"369bfac34e6997171927d455c267e78d:77a2e9db58dbe89c8d38890ca5f1df4d" ,"secretKey":"UsppVBYTdBLEOKj0JRBZhYfkk0w2RA7Y7UmgWMZZogoA429fZGiWPkP80VwpIocz6"},
+       body:JSON.stringify(reqbody)
+   }
+   )
+   req=await req.json()
+   await (req)
+       {
+             
+             user.name=req.result.data.full_name;
+             user.aadhhar=req.result.data.aadhaar_number;
+             user.dob=req.result.data.dob;
+             user.gender=req.result.data.gender;
+             user.Addr=req.result.data.address;
+       }   
+
+ 
+fetch("http://localhost:3100/userreg",
+{
+   method:"POST",
+   headers:{"Content-Type":"application/json", Accept:"application/json"},
+   body:JSON.stringify(user)
+
+}).then(res=>res.json()).then((data)=>alert(data))
+                     
+                     
+ }  
+</script>
+</html>
